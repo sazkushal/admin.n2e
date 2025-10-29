@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Dashboard | Need2Earn</title>
+  <link rel="stylesheet" href="global_style.css" />
+  <style>
+    body {
+      background: #0f172a;
+      color: #f1f5f9;
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background: #1e293b;
+      padding: 15px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 2px solid #334155;
+    }
+    header h1 {
+      font-size: 20px;
+      font-weight: 600;
+    }
+    button.logout {
+      background: #ef4444;
+      color: white;
+      border: none;
+      padding: 8px 14px;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    .container {
+      padding: 20px;
+    }
+    nav {
+      margin-bottom: 20px;
+    }
+    nav button {
+      background: #1e293b;
+      color: #f8fafc;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 6px;
+      margin-right: 10px;
+      cursor: pointer;
+    }
+    nav button.active {
+      background: #3b82f6;
+    }
+    .stats {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
+    .stat-card {
+      background: #1e293b;
+      padding: 15px 20px;
+      border-radius: 8px;
+      min-width: 200px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+      background: #1e293b;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    th, td {
+      padding: 10px;
+      border-bottom: 1px solid #334155;
+      text-align: left;
+    }
+    th {
+      background: #334155;
+      color: #e2e8f0;
+      cursor: pointer;
+    }
+    tr:hover {
+      background: #2d3a54;
+    }
+    input.search {
+      margin-bottom: 10px;
+      padding: 8px;
+      width: 250px;
+      border-radius: 6px;
+      border: 1px solid #475569;
+      background: #0f172a;
+      color: white;
+    }
+    .action-btn {
+      padding: 6px 10px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    .accept {
+      background: #10b981;
+      color: white;
+    }
+    .reject {
+      background: #ef4444;
+      color: white;
+    }
+    .edit {
+      background: #3b82f6;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Need2Earn Admin Panel</h1>
+    <button class="logout" onclick="logout()">Logout</button>
+  </header>
+
+  <div class="container">
+    <nav>
+      <button class="active" onclick="showSection('dashboard')">Dashboard</button>
+      <button onclick="showSection('users')">Users</button>
+      <button onclick="showSection('withdrawals')">Withdrawals</button>
+      <button onclick="showSection('payments')">Payments</button>
+      <button onclick="showSection('giftcodes')">Gift Codes</button>
+      <button onclick="showSection('links')">Links</button>
+      <button onclick="showSection('offerwall')">Offerwall</button>
+    </nav>
+
+    <!-- Dashboard Section -->
+    <div id="dashboard" class="section">
+      <h2>Dashboard Overview</h2>
+      <div class="stats">
+        <div class="stat-card" id="totalUsers">Total Users: ...</div>
+        <div class="stat-card" id="totalBalance">Total Balance: ...</div>
+        <div class="stat-card" id="pendingWithdrawals">Pending Withdrawals: ...</div>
+        <div class="stat-card" id="successWithdrawals">Successful Withdrawals: ...</div>
+        <div class="stat-card" id="failedWithdrawals">Failed Withdrawals: ...</div>
+      </div>
+    </div>
+
+    <!-- Users Table -->
+    <div id="users" class="section" style="display:none;">
+      <h2>Users</h2>
+      <input type="text" class="search" id="searchUsers" placeholder="Search users..." onkeyup="filterTable('usersTable', this.value)">
+      <table id="usersTable"></table>
+    </div>
+
+    <!-- Withdrawals -->
+    <div id="withdrawals" class="section" style="display:none;">
+      <h2>Withdrawals</h2>
+      <input type="text" class="search" id="searchWithdrawals" placeholder="Search withdrawals..." onkeyup="filterTable('withdrawalsTable', this.value)">
+      <table id="withdrawalsTable"></table>
+    </div>
+
+    <!-- Payments -->
+    <div id="payments" class="section" style="display:none;">
+      <h2>Payment Methods</h2>
+      <input type="text" class="search" id="searchPayments" placeholder="Search payments..." onkeyup="filterTable('paymentsTable', this.value)">
+      <table id="paymentsTable"></table>
+    </div>
+
+    <!-- Gift Codes -->
+    <div id="giftcodes" class="section" style="display:none;">
+      <h2>Gift Codes</h2>
+      <input type="text" class="search" id="searchGiftCodes" placeholder="Search gift codes..." onkeyup="filterTable('giftcodesTable', this.value)">
+      <table id="giftcodesTable"></table>
+    </div>
+
+    <!-- Links -->
+    <div id="links" class="section" style="display:none;">
+      <h2>Links</h2>
+      <input type="text" class="search" id="searchLinks" placeholder="Search links..." onkeyup="filterTable('linksTable', this.value)">
+      <table id="linksTable"></table>
+    </div>
+
+    <!-- Offerwall -->
+    <div id="offerwall" class="section" style="display:none;">
+      <h2>Offerwall Details</h2>
+      <input type="text" class="search" id="searchOfferwall" placeholder="Search offerwall..." onkeyup="filterTable('offerwallTable', this.value)">
+      <table id="offerwallTable"></table>
+    </div>
+  </div>
+
+  <script type="module" src="admin_script.js"></script>
+</body>
+</html>

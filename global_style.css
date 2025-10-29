@@ -1,0 +1,361 @@
+/* 🌑 Global Stake-like Theme for Need2Earn */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+  user-select: none; /* disable text highlight */
+  -webkit-tap-highlight-color: transparent; /* remove blue tap highlight */
+  outline: none; /* remove blue outline */
+}
+
+body {
+  background: linear-gradient(180deg, #0f172a, #1e293b);
+  color: #f1f5f9;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+}
+
+/* 🔹 Header */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(30, 41, 59, 0.85);
+  backdrop-filter: blur(10px);
+  padding: 15px 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.logo {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #38bdf8;
+  letter-spacing: 1px;
+  text-shadow: 0 0 10px rgba(56,189,248,0.4);
+}
+
+.auth-btn {
+  background: #38bdf8;
+  color: #0f172a;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 8px;
+  margin-left: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.auth-btn:hover {
+  background: #0ea5e9;
+  transform: translateY(-2px);
+}
+
+.balance {
+  background: rgba(56,189,248,0.1);
+  color: #38bdf8;
+  padding: 6px 14px;
+  border-radius: 10px;
+  font-weight: 600;
+}
+
+/* 🔸 Main */
+main {
+  flex: 1;
+  padding: 20px;
+}
+
+.tasks-section {
+  display: grid;
+  gap: 20px;
+  animation: fadeIn 0.6s ease-in-out;
+}
+
+.task-card {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 20px;
+  transition: all 0.3s;
+  cursor: pointer;
+}
+
+.task-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0 15px rgba(56,189,248,0.2);
+}
+
+/* 🔻 Bottom Navigation */
+.bottom-nav {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background: rgba(15, 23, 42, 0.9);
+  backdrop-filter: blur(12px);
+  padding: 10px 0 8px;
+  border-top: 1px solid rgba(255,255,255,0.1);
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  animation: slideUp 0.5s ease;
+}
+
+.bottom-nav a {
+  color: #94a3b8;
+  text-decoration: none;
+  text-align: center;
+  flex: 1;
+  font-size: 0.8rem;
+  transition: all 0.3s;
+  padding-top: 4px;
+}
+
+.bottom-nav i {
+  display: block;
+  margin: 0 auto 4px;
+  width: 22px;
+  height: 22px;
+  stroke-width: 2;
+  transition: all 0.3s;
+}
+
+.bottom-nav a.active,
+.bottom-nav a:hover {
+  color: #38bdf8;
+  transform: translateY(-3px);
+}
+
+.bottom-nav a.active i,
+.bottom-nav a:hover i {
+  stroke: #38bdf8;
+  transform: scale(1.1);
+}
+
+/* ✨ Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideUp {
+  from { transform: translateY(100%); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+/* 📱 Responsive */
+@media (max-width: 768px) {
+  .logo { font-size: 1.3rem; }
+  .auth-btn { padding: 6px 10px; }
+  .task-card { padding: 15px; }
+}
+
+/* 🧾 Form & Input Styling (for signup/login pages) */
+.card {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: 25px 20px;
+  max-width: 400px;
+  margin: 60px auto;
+  box-shadow: 0 0 20px rgba(56,189,248,0.05);
+  animation: fadeIn 0.6s ease;
+}
+
+.card h2 {
+  text-align: center;
+  color: #38bdf8;
+  margin-bottom: 20px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+label {
+  font-weight: 500;
+  color: #cbd5e1;
+  font-size: 0.9rem;
+}
+
+input {
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  padding: 10px 14px;
+  color: #f1f5f9;
+  font-size: 0.95rem;
+  transition: all 0.3s;
+}
+
+input:focus {
+  border-color: #38bdf8;
+  box-shadow: 0 0 8px rgba(56,189,248,0.3);
+}
+
+.btn-primary {
+  background: #38bdf8;
+  color: #0f172a;
+  border: none;
+  padding: 12px;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+  background: #0ea5e9;
+  transform: translateY(-2px);
+}
+
+.redirect-text {
+  text-align: center;
+  margin-top: 10px;
+  color: #94a3b8;
+}
+
+.redirect-text a {
+  color: #38bdf8;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.message {
+  text-align: center;
+  margin-top: 12px;
+  font-weight: 500;
+  color: #f1f5f9;
+}
+/* 🧾 Form Styling - Global for Signup/Login/Profile */
+.form-container {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  padding: 25px 20px;
+  max-width: 400px;
+  margin: 40px auto;
+  box-shadow: 0 0 20px rgba(56, 189, 248, 0.08);
+  animation: fadeIn 0.6s ease;
+}
+
+.form-container h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 1.6rem;
+  color: #38bdf8;
+  text-shadow: 0 0 8px rgba(56, 189, 248, 0.4);
+}
+
+.input-group {
+  margin-bottom: 18px;
+  display: flex;
+  flex-direction: column;
+}
+
+.input-group label {
+  margin-bottom: 6px;
+  font-weight: 500;
+  color: #94a3b8;
+  font-size: 0.9rem;
+}
+
+.input-group input {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #f1f5f9;
+  padding: 10px 12px;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: border 0.3s, box-shadow 0.3s;
+}
+
+.input-group input:focus {
+  border-color: #38bdf8;
+  box-shadow: 0 0 8px rgba(56, 189, 248, 0.3);
+}
+
+.submit-btn {
+  width: 100%;
+  background: #38bdf8;
+  color: #0f172a;
+  border: none;
+  padding: 12px;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s;
+  margin-top: 10px;
+}
+
+.submit-btn:hover {
+  background: #0ea5e9;
+  transform: translateY(-2px);
+  box-shadow: 0 0 12px rgba(56, 189, 248, 0.3);
+}
+
+.redirect-text {
+  text-align: center;
+  margin-top: 15px;
+  font-size: 0.9rem;
+  color: #94a3b8;
+}
+
+.redirect-text a {
+  color: #38bdf8;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.redirect-text a:hover {
+  text-decoration: underline;
+}
+
+#message {
+  text-align: center;
+  margin-top: 15px;
+  font-size: 0.9rem;
+}
+.withdraw-options-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+  margin-top: 15px;
+  justify-items: center;
+}
+
+.withdraw-btn {
+  padding: 25px 0;
+  width: 120px;
+  font-size: 20px;
+  font-weight: 600;
+  border-radius: 12px;
+  border: 1px solid #38bdf8;
+  background-color: rgba(56,189,248,0.2);
+  color: #0f172a;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.withdraw-btn:hover {
+  background-color: #38bdf8;
+  color: #0f172a;
+  transform: scale(1.05);
+}
+
+.withdraw-btn.active {
+  background-color: #38bdf8;
+  color: #0f172a;
+  border: 2px solid #0f172a;
+}

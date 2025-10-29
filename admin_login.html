@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Login | Need2Earn</title>
+  <link rel="stylesheet" href="global_style.css" />
+  <style>
+    body {
+      background: #0f172a;
+      color: #f8fafc;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      font-family: 'Poppins', sans-serif;
+    }
+    .login-container {
+      background: #1e293b;
+      padding: 2rem;
+      border-radius: 12px;
+      width: 100%;
+      max-width: 400px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.3);
+    }
+    h1 {
+      text-align: center;
+      color: #38bdf8;
+      margin-bottom: 1.5rem;
+    }
+    input {
+      width: 100%;
+      padding: 0.75rem;
+      margin-bottom: 1rem;
+      border: none;
+      border-radius: 6px;
+      background: #334155;
+      color: #f8fafc;
+    }
+    button {
+      width: 100%;
+      padding: 0.75rem;
+      background: #38bdf8;
+      border: none;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #0ea5e9;
+    }
+    .error {
+      color: #f87171;
+      text-align: center;
+      margin-top: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="login-container">
+    <h1>Admin Login</h1>
+    <input type="text" id="adminUsername" placeholder="Username" />
+    <input type="password" id="adminPassword" placeholder="Password" />
+    <button onclick="adminLogin()">Login</button>
+    <div id="errorMsg" class="error"></div>
+  </div>
+
+  <script type="module">
+  import { createClient } from 'https://esm.sh/@supabase/supabase-js'
+  const supabase = createClient(
+    'https://hkfixjnwzkghapljsxzg.supabase.co',
+    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhrZml4am53emtnaGFwbGpzeHpnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjExNDYyODgsImV4cCI6MjA3NjcyMjI4OH0.vfaXH70jFUlNzqynIKDKyCpIH5P0SrrwRWROjfIB5EI'
+  )
+
+  async function adminLogin() {
+    const username = document.getElementById('adminUsername').value.trim()
+    const password = document.getElementById('adminPassword').value.trim()
+    const errorMsg = document.getElementById('errorMsg')
+    errorMsg.textContent = ''
+
+    const { data, error } = await supabase
+      .from('admins')
+      .select('*')
+      .eq('username', username)
+      .eq('password', password)
+      .single()
+
+    if (error || !data) {
+      errorMsg.textContent = 'Invalid credentials'
+      return
+    }
+
+    // Save admin session
+    localStorage.setItem('adminLoggedIn', 'true')
+    localStorage.setItem('adminUser', data.username)
+
+    window.location.href = 'admin.html'
+  }
+
+  // ✅ Make it accessible to the HTML onclick
+  window.adminLogin = adminLogin;
+</script>
+
+</body>
+</html>
